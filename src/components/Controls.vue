@@ -11,14 +11,12 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 const axios = require('axios').default
 export default {
   name: 'Controls',
-  data: () => ({
-    time: ''
-  }),
-  mounted () {
-    this.time = this.$store.getters.getCurrentTime
+  computed: {
+    ...mapGetters({ time: 'getCurrentTime' })
   },
   methods: {
     play () {

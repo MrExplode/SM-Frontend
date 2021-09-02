@@ -31,6 +31,7 @@ export default {
 
   mounted () {
     this._webSocket = new WebSocket(`ws://${location.host}`)
+    // this._webSocket = new WebSocket('ws://localhost:7000')
     this._webSocket.onopen = () => {
       console.log('[WS] Opened')
     }
@@ -40,9 +41,16 @@ export default {
     }
 
     this._webSocket.onmessage = (message) => {
-      const payload = JSON.parse(message)
-      console.log(`[WS] Received ${payload}`)
+      const payload = JSON.parse(message.data)
+      switch (payload.type) {
+        case 'time-change':
+          this.$store.commit('setCurrentTime', `${payload.hour} : ${payload.min} : ${payload.sec} / ${payload.frame}`)
+      }
     }
+
+    setInterval(() => {
+      this._webSocket.send(JSON.stringify({ type: 'ping' }))
+    }, 10000)
   }
 }
 </script>
