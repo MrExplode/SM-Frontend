@@ -45,6 +45,9 @@ export default {
       switch (payload.type) {
         case 'time-change':
           this.$store.commit('setCurrentTime', `${payload.hour} : ${payload.min} : ${payload.sec} / ${payload.frame}`)
+          break
+        case 'log':
+          // display system logs
       }
     }
 
