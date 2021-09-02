@@ -1,0 +1,38 @@
+<template>
+  <v-card elevation="4" class="mx-3 my-3" max-width="344">
+    <v-card-title>Current Time</v-card-title>
+    <v-card-text>{{ time }}</v-card-text>
+    <v-card-actions>
+      <v-btn @click="play" color="green lighten-4">Play</v-btn>
+      <v-btn @click="pause" color="yellow lighten-4">Pause</v-btn>
+      <v-btn @click="stop" color="red lighten-4">Stop</v-btn>
+    </v-card-actions>
+  </v-card>
+</template>
+
+<script>
+const axios = require('axios').default
+export default {
+  name: 'Controls',
+  data: () => ({
+    time: ''
+  }),
+  mounted () {
+    this.time = this.$store.getters.getCurrentTime
+  },
+  methods: {
+    play () {
+      console.log('play')
+      axios.post('/control/play')
+    },
+    pause () {
+      console.log('pause')
+      axios.post('/control/pause')
+    },
+    stop () {
+      console.log('stop')
+      axios.post('/control/stop')
+    }
+  }
+}
+</script>
