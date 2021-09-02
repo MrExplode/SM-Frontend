@@ -1,8 +1,8 @@
 <template>
   <div class="d-flex flex-wrap">
-    <time-panel class="flex-grow-1"/>
-    <outputs />
-    <console />
+    <time-panel class="flex-grow-1 align-self-start"/>
+    <outputs  class="align-self-start"/>
+    <console class="align-self-start"/>
   </div>
 </template>
 
