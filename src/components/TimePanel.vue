@@ -23,20 +23,14 @@ export default {
   methods: {
     play () {
       console.log('play')
-      this.playing = true
-      this.paused = false
       axios.post('http://localhost:7000/control/play')
     },
     pause () {
       console.log('pause')
-      this.playing = false
-      this.paused = true
       axios.post('http://localhost:7000/control/pause')
     },
     stop () {
       console.log('stop')
-      this.playing = false
-      this.paused = false
       axios.post('http://localhost:7000/control/stop')
     }
   }
