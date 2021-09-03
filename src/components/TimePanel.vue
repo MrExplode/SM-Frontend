@@ -15,14 +15,10 @@ import { mapGetters } from 'vuex'
 const axios = require('axios').default
 export default {
   name: 'Controls',
-  data () {
-    return {
-      playing: false,
-      paused: false
-    }
-  },
   computed: {
-    ...mapGetters({ time: 'getCurrentTime' })
+    ...mapGetters({ time: 'getCurrentTime' }),
+    ...mapGetters({ playing: 'isPlaying' }),
+    ...mapGetters({ paused: 'isPaused' })
   },
   methods: {
     play () {

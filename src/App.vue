@@ -46,8 +46,21 @@ export default {
         case 'time-change':
           this.$store.commit('setCurrentTime', `${payload.hour} : ${payload.min} : ${payload.sec} / ${payload.frame}`)
           break
+        case 'time-start':
+          this.$store.commit('setPlaying', true)
+          this.$store.commit('setPaused', false)
+          break
+        case 'time-pause':
+          this.$store.commit('setPlaying', false)
+          this.$store.commit('setPaused', true)
+          break
+        case 'time-stop':
+          this.$store.commit('setPlaying', false)
+          this.$store.commit('setPaused', false)
+          break
         case 'log':
           // display system logs
+          break
       }
     }
 
