@@ -23,15 +23,15 @@ export default {
   methods: {
     play () {
       console.log('play')
-      axios.post('http://localhost:7000/control/play')
+      axios.post(`${window.REST_HOST}/control/play`)
     },
     pause () {
       console.log('pause')
-      axios.post('http://localhost:7000/control/pause')
+      axios.post(`${window.REST_HOST}/control/pause`)
     },
     stop () {
       console.log('stop')
-      axios.post('http://localhost:7000/control/stop')
+      axios.post(`${window.REST_HOST}/control/stop`)
     }
   }
 }

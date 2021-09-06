@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <loading-screen  :visible="loading" :message="displayText"/>
     <v-app-bar app color="teal darken-1" dark>
       <div class="d-flex align-center">
         <v-img
@@ -29,51 +30,75 @@
 </template>
 
 <script>
+import LoadingScreen from './components/LoadingScreen.vue'
 export default {
+  components: { LoadingScreen },
   name: 'App',
 
   data: () => ({
-    //
+    loading: true,
+    displayText: 'Connecting...',
+    pingTaskId: -1
   }),
 
-  mounted () {
-    this._webSocket = new WebSocket(`ws://${location.host}`)
-    // this._webSocket = new WebSocket('ws://localhost:7000')
-    this._webSocket.onopen = () => {
-      console.log('[WS] Opened')
-    }
+  methods: {
+    retryWebSocket () {
+      this.displayText = 'Reconnecting in 5 seconds'
+      setTimeout(() => {
+        this._webSocket = undefined
+        this.createWebSocket()
+      }, 5000)
+    },
+    createWebSocket () {
+      this._webSocket = new WebSocket(window.WS_HOST)
+      // this._webSocket = new WebSocket('ws://localhost:7000')
+      this._webSocket.onopen = () => {
+        console.log('[WS] Opened')
+        this.pingTaskId = setInterval(() => {
+          this._webSocket.send(JSON.stringify({ type: 'ping' }))
+        }, 10000)
+      }
 
-    this._webSocket.onclose = (event) => {
-      console.log('[WS] Disconnected')
-    }
+      this._webSocket.onclose = (event) => {
+        console.log('[WS] Disconnected')
+        this.loading = true
+        if (this.pingTaskId !== -1) {
+          clearInterval(this.pingTaskId)
+        }
+        this.retryWebSocket()
+      }
 
-    this._webSocket.onmessage = (message) => {
-      const payload = JSON.parse(message.data)
-      switch (payload.type) {
-        case 'time-change':
-          this.$store.commit('setCurrentTime', `${payload.hour} : ${payload.min} : ${payload.sec} / ${payload.frame}`)
-          break
-        case 'time-start':
-          this.$store.commit('setPlaying', true)
-          this.$store.commit('setPaused', false)
-          break
-        case 'time-pause':
-          this.$store.commit('setPlaying', false)
-          this.$store.commit('setPaused', true)
-          break
-        case 'time-stop':
-          this.$store.commit('setPlaying', false)
-          this.$store.commit('setPaused', false)
-          break
-        case 'log':
+      this._webSocket.onmessage = (message) => {
+        const payload = JSON.parse(message.data)
+        switch (payload.type) {
+          case 'init':
+            this.loading = false
+            break
+          case 'time-change':
+            this.$store.commit('setCurrentTime', `${payload.hour} : ${payload.min} : ${payload.sec} / ${payload.frame}`)
+            break
+          case 'time-start':
+            this.$store.commit('setPlaying', true)
+            this.$store.commit('setPaused', false)
+            break
+          case 'time-pause':
+            this.$store.commit('setPlaying', false)
+            this.$store.commit('setPaused', true)
+            break
+          case 'time-stop':
+            this.$store.commit('setPlaying', false)
+            this.$store.commit('setPaused', false)
+            break
+          case 'log':
           // display system logs
-          break
+            break
+        }
       }
     }
+  },
 
-    setInterval(() => {
-      this._webSocket.send(JSON.stringify({ type: 'ping' }))
-    }, 10000)
+  mounted () {
+    this.createWebSocket()
   }
 }
 </script>
