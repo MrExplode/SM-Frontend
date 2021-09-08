@@ -14,8 +14,11 @@
           />
         </router-link>
       </div>
-      <menu-navigator />
+      <v-btn tile plain x-large to="/">
+        ShowManager
+      </v-btn>
       <v-spacer></v-spacer>
+      <menu-navigator />
       <v-btn icon class="hidden-sm-and-down">
         <v-icon>mdi-information</v-icon>
       </v-btn>

@@ -1,8 +1,5 @@
 <template>
   <div class="d-flex align-center">
-    <v-btn tile plain x-large to="/">
-      ShowManager
-    </v-btn>
     <v-btn v-for="(item, index) in this.menus" :key="index" tile plain x-large :to="item.toLowerCase()" class="mx-3 hidden-sm-and-down">
       {{item }}
     </v-btn>
