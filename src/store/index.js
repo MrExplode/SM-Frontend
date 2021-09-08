@@ -26,11 +26,14 @@ export default new Vuex.Store({
       state.paused = payload
     },
     addLog (state, payload) {
-      if (state.logs.length >= 100) {
+      if (state.logs.length > 100) {
         state.logs.shift()
       }
       // yeah I know it's O(n)
       state.logs.push(payload)
+    },
+    loadLog (state, payload) {
+      state.logs = payload.slice(0, 100)
     }
   },
   actions: {

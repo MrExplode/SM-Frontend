@@ -90,6 +90,7 @@ export default {
         switch (payload.type) {
           case 'init':
             this.$store.commit('setLoading', false)
+            this.$store.commit('loadLog', payload.logs)
             break
           case 'time-change':
             this.$store.commit('setCurrentTime', `${payload.hour} : ${payload.min} : ${payload.sec} / ${payload.frame}`)
