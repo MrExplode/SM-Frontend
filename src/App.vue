@@ -3,27 +3,23 @@
     <loading-screen  :visible="loading" :message="displayText"/>
     <v-app-bar app color="teal darken-1" dark>
       <div class="d-flex align-center">
-        <v-img
-          alt="ShowManager Logo"
-          class="shrink"
-          contain
-          src="https://cdn.sunstorm.rocks/files/showmanager/icon32.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-btn tile plain x-large to="/">
-          ShowManager
-        </v-btn>
+        <router-link to="/">
+          <v-img
+            alt="ShowManager Logo"
+            class="shrink"
+            contain
+            src="https://cdn.sunstorm.rocks/files/showmanager/icon32.png"
+            transition="scale-transition"
+            width="40"
+          />
+        </router-link>
       </div>
-      <v-btn tile plain x-large to="/console" class="mx-3">
-        Console
-      </v-btn>
+      <menu-navigator />
       <v-spacer></v-spacer>
       <v-btn icon class="hidden-sm-and-down">
         <v-icon>mdi-information</v-icon>
       </v-btn>
-      <v-btn icon class="hidden-sm-and-down" href="https://github.com/" target="_blank">
+      <v-btn icon class="hidden-sm-and-down" href="https://github.com/ShowManager" target="_blank">
         <v-icon>mdi-github</v-icon>
       </v-btn>
     </v-app-bar>
@@ -37,8 +33,12 @@
 <script>
 import { mapGetters } from 'vuex'
 import LoadingScreen from './components/LoadingScreen.vue'
+import MenuNavigator from './components/MenuNavigator.vue'
 export default {
-  components: { LoadingScreen },
+  components: {
+    LoadingScreen,
+    MenuNavigator
+  },
   name: 'App',
 
   data: () => ({
