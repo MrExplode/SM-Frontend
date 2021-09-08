@@ -5,15 +5,20 @@
       <div class="d-flex align-center">
         <v-img
           alt="ShowManager Logo"
-          class="shrink mr-2"
+          class="shrink"
           contain
           src="https://cdn.sunstorm.rocks/files/showmanager/icon32.png"
           transition="scale-transition"
           width="40"
         />
 
-        <div class="mt-1">ShowManager</div>
+        <v-btn tile plain x-large to="/">
+          ShowManager
+        </v-btn>
       </div>
+      <v-btn tile plain x-large to="/console" class="mx-3">
+        Console
+      </v-btn>
       <v-spacer></v-spacer>
       <v-btn icon class="hidden-sm-and-down">
         <v-icon>mdi-information</v-icon>
@@ -30,13 +35,13 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import LoadingScreen from './components/LoadingScreen.vue'
 export default {
   components: { LoadingScreen },
   name: 'App',
 
   data: () => ({
-    loading: true,
     displayText: 'Connecting...',
     pingTaskId: -1,
     retryTaskId: -1,
@@ -62,6 +67,7 @@ export default {
       // this._webSocket = new WebSocket('ws://localhost:7000')
       this._webSocket.onopen = () => {
         console.log('[WS] Opened')
+        console.log(this.$router)
         this.pingTaskId = setInterval(() => {
           this._webSocket.send(JSON.stringify({ type: 'ping' }))
         }, 10000)
@@ -69,7 +75,7 @@ export default {
 
       this._webSocket.onclose = (event) => {
         console.log('[WS] Disconnected')
-        this.loading = true
+        this.$store.commit('setLoading', true)
         if (this.pingTaskId !== -1) {
           clearInterval(this.pingTaskId)
         }
@@ -80,7 +86,7 @@ export default {
         const payload = JSON.parse(message.data)
         switch (payload.type) {
           case 'init':
-            this.loading = false
+            this.$store.commit('setLoading', false)
             break
           case 'time-change':
             this.$store.commit('setCurrentTime', `${payload.hour} : ${payload.min} : ${payload.sec} / ${payload.frame}`)
@@ -98,11 +104,15 @@ export default {
             this.$store.commit('setPaused', false)
             break
           case 'log':
-          // display system logs
+            this.$store.commit('addLog', payload.log)
             break
         }
       }
     }
+  },
+
+  computed: {
+    ...mapGetters({ loading: 'isLoading' })
   },
 
   mounted () {

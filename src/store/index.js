@@ -5,12 +5,17 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    loading: true,
     currentTime: '00 : 00 : 00 / 00',
     playing: false,
-    paused: false
+    paused: false,
+    logs: []
   },
   mutations: {
     // sync
+    setLoading (state, payload) {
+      state.loading = payload
+    },
     setCurrentTime (state, payload) {
       state.currentTime = payload
     },
@@ -19,6 +24,13 @@ export default new Vuex.Store({
     },
     setPaused (state, payload) {
       state.paused = payload
+    },
+    addLog (state, payload) {
+      if (state.logs.length >= 100) {
+        state.logs.shift()
+      }
+      // yeah I know it's O(n)
+      state.logs.push(payload)
     }
   },
   actions: {
@@ -26,8 +38,10 @@ export default new Vuex.Store({
   },
   modules: {},
   getters: {
+    isLoading: (state) => state.loading,
     getCurrentTime: (state) => state.currentTime,
     isPlaying: (state) => state.playing,
-    isPaused: (state) => state.paused
+    isPaused: (state) => state.paused,
+    getLogs: (state) => state.logs
   }
 })
