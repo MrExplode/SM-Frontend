@@ -38,16 +38,24 @@ export default {
   data: () => ({
     loading: true,
     displayText: 'Connecting...',
-    pingTaskId: -1
+    pingTaskId: -1,
+    retryTaskId: -1,
+    retryCountdown: 5
   }),
 
   methods: {
     retryWebSocket () {
-      this.displayText = 'Reconnecting in 5 seconds'
-      setTimeout(() => {
-        this._webSocket = undefined
-        this.createWebSocket()
-      }, 5000)
+      this.retryCountdown = 5
+      this.retryTaskId = setInterval(() => {
+        this.displayText = `Reconnecting in ${this.retryCountdown} seconds`
+        if (this.retryCountdown > 0) {
+          this.retryCountdown--
+        } else {
+          clearInterval(this.retryTaskId)
+          this._webSocket = undefined
+          this.createWebSocket()
+        }
+      }, 1000)
     },
     createWebSocket () {
       this._webSocket = new WebSocket(window.WS_HOST)
