@@ -22,7 +22,7 @@
       <v-btn icon class="hidden-sm-and-down">
         <v-icon>mdi-information</v-icon>
       </v-btn>
-      <v-btn icon class="hidden-sm-and-down" href="https://github.com/ShowManager" target="_blank">
+      <v-btn icon class="hidden-sm-and-down" href="https://github.com/MrExplode/ShowManager" target="_blank">
         <v-icon>mdi-github</v-icon>
       </v-btn>
     </v-app-bar>
