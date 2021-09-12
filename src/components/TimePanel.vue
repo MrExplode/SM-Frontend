@@ -17,8 +17,7 @@ export default {
   name: 'Controls',
   computed: {
     ...mapGetters({ time: 'getCurrentTime' }),
-    ...mapGetters({ playing: 'isPlaying' }),
-    ...mapGetters({ paused: 'isPaused' })
+    ...mapGetters('controls', ['playing', 'paused'])
   },
   methods: {
     play () {
