@@ -16,7 +16,7 @@ export default {
   },
 
   getters: {
-    isPlaying: (state) => state.playing,
-    isPaused: (state) => state.paused
+    playing: (state) => state.playing,
+    paused: (state) => state.paused
   }
 }
