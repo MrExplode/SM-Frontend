@@ -15,7 +15,7 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'Outputs',
   computed: {
-    ...mapGetters({ playing: 'isPlaying' })
+    ...mapGetters({ playing: 'controls/playing' })
   }
 }
 </script>
