@@ -35,7 +35,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import SocketHandler from './websocket/sockethandler.js'
+import SocketHandler from './handlers/socket.js'
 import LoadingScreen from './components/LoadingScreen.vue'
 import MenuNavigator from './components/MenuNavigator.vue'
 export default {

@@ -1,5 +1,11 @@
+import AudioHandler from './audio'
+import TimeHandler from './time'
+
 export default class SocketHandler {
   constructor (store) {
+    this.timeHandler = new TimeHandler(store)
+    this.audioHandler = new AudioHandler(store)
+
     this.$store = store
     this.webSocket = undefined
     this.pingTaskId = -1
@@ -57,20 +63,11 @@ export default class SocketHandler {
         this.$store.commit('setLoading', false)
         this.$store.commit('loadLog', payload.logs)
         break
-      case 'time-change':
-        this.$store.commit('setCurrentTime', `${payload.hour} : ${payload.min} : ${payload.sec} / ${payload.frame}`)
+      case 'time':
+        this.timeHandler.handleTimeMessage(payload)
         break
-      case 'time-start':
-        this.$store.commit('controls/playing', true)
-        this.$store.commit('controls/paused', false)
-        break
-      case 'time-pause':
-        this.$store.commit('controls/playing', false)
-        this.$store.commit('controls/paused', true)
-        break
-      case 'time-stop':
-        this.$store.commit('controls/playing', false)
-        this.$store.commit('controls/paused', false)
+      case 'audio':
+        this.audioHandler.handleAudioMessage(payload)
         break
       case 'log':
         this.$store.commit('addLog', payload.log)
