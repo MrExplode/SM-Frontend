@@ -29,7 +29,6 @@ export default class SocketHandler {
 
   createWebSocket () {
     this.webSocket = new WebSocket(window.WS_HOST)
-    // this._webSocket = new WebSocket('ws://localhost:7000')
     this.webSocket.onopen = () => {
       console.log('[WS] Opened')
       this.pingTaskId = setInterval(() => {
@@ -52,7 +51,7 @@ export default class SocketHandler {
         this.handleMessage(payload)
       } catch (error) {
         console.log('Failed to handle WS message:', error)
-        this.$store.connit('addLog', '[Vue] Failed to handle message: ' + error.toString())
+        this.$store.commit('addLog', '[Vue] Failed to handle message: ' + error.toString())
       }
     }
   }
