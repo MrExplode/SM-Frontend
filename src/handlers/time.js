@@ -9,16 +9,16 @@ export default class TimeHandler {
         this.$store.commit('setCurrentTime', `${payload.hour} : ${payload.min} : ${payload.sec} / ${payload.frame}`)
         break
       case 'start':
-        this.$store.commit('controls/playing', true)
-        this.$store.commit('controls/paused', false)
+        this.$store.commit('controls/setPlaying', true)
+        this.$store.commit('controls/setPaused', false)
         break
       case 'pause':
-        this.$store.commit('controls/playing', false)
-        this.$store.commit('controls/paused', true)
+        this.$store.commit('controls/setPlaying', false)
+        this.$store.commit('controls/setPaused', true)
         break
       case 'stop':
-        this.$store.commit('controls/playing', false)
-        this.$store.commit('controls/paused', false)
+        this.$store.commit('controls/setPlaying', false)
+        this.$store.commit('controls/setPaused', false)
         break
     }
   }
