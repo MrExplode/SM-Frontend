@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 
 import controls from './modules/controls.js'
 import outputs from './modules/outputs.js'
+import audio from './modules/audio.js'
 
 Vue.use(Vuex)
 
@@ -15,7 +16,8 @@ export default new Vuex.Store({
 
   modules: {
     controls,
-    outputs
+    outputs,
+    audio
   },
 
   mutations: {

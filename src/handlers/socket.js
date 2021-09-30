@@ -1,10 +1,12 @@
-import AudioHandler from './audio'
+import AudioHandler from './audioHandler'
 import TimeHandler from './time'
+import SchedulerHandler from './scheduler'
 
 export default class SocketHandler {
   constructor (store) {
     this.timeHandler = new TimeHandler(store)
     this.audioHandler = new AudioHandler(store)
+    this.schedulerHandler = new SchedulerHandler(store)
 
     this.$store = store
     this.webSocket = undefined
@@ -61,12 +63,19 @@ export default class SocketHandler {
       case 'init':
         this.$store.commit('setLoading', false)
         this.$store.commit('loadLog', payload.logs)
+        this.$store.commit('outputs/setArtnet', payload.outputs.artnet)
+        this.$store.commit('outputs/setAudio', payload.outputs.ltc)
+        this.$store.commit('outputs/setLtc', payload.outputs.ltc)
+        this.$store.commit('outputs/setScheduler', payload.outputs.scheduler)
         break
       case 'time':
         this.timeHandler.handleTimeMessage(payload)
         break
       case 'audio':
         this.audioHandler.handleAudioMessage(payload)
+        break
+      case 'scheduler':
+        this.schedulerHandler.handleSchedulerMessage(payload)
         break
       case 'log':
         this.$store.commit('addLog', payload.log)

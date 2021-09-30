@@ -1,5 +1,5 @@
 <template>
-    <v-card class="mx-3 my-3">
+    <v-card elevation="4" class="mx-3 my-3">
         <v-card-title>Outputs</v-card-title>
         <div class="mx-2 d-flex flex-column">
             <v-switch :disabled="playing" label="ArtNet" :input-value="artnet" @change="setArtnet" color="teal lighten-2" class="my-0"/>
@@ -15,9 +15,6 @@ import { mapGetters } from 'vuex'
 const axios = require('axios').default
 export default {
   name: 'Outputs',
-  data: () => ({
-    // asd
-  }),
   computed: {
     ...mapGetters({ playing: 'controls/playing' }),
     ...mapGetters('outputs', ['artnet', 'audio', 'ltc', 'scheduler'])
