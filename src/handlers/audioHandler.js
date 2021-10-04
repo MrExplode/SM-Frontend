@@ -1,5 +1,3 @@
-import { EventBus } from './eventbus'
-
 export default class AudioHandler {
   constructor (store) {
     this.$store = store
@@ -9,6 +7,7 @@ export default class AudioHandler {
     // stuff
     switch (payload.action) {
       case 'load':
+        this.$store.commit('audio/setLoadedAudio', payload.name)
         break
       case 'start':
         break

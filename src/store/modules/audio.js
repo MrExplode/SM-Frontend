@@ -1,13 +1,17 @@
 export default {
   namespaced: true,
 
-  state: () => ({}),
+  state: () => ({
+    loadedAudio: ''
+  }),
 
   mutations: {
-    // asd
+    setLoadedAudio (state, payload) {
+      state.loadedAudio = payload
+    }
   },
 
   getters: {
-    // asd
+    loadedAudio: (state) => state.loadedAudio
   }
 }
