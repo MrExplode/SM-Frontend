@@ -32,7 +32,6 @@
 </template>
 
 <script>
-const axios = require('axios').default
 const validFormat = /([0-9]{2}):([0-9]{2}):([0-9]{2})\/([0-9]{2})/
 
 export default {
@@ -52,7 +51,7 @@ export default {
       this.dialog = false
       const match = this.inputText.match(validFormat)
       if (match && match.length === 5) {
-        axios.post(`${window.REST_HOST}/control/set`, {
+        this.$emit('timeSet', {
           hour: match[1],
           min: match[2],
           sec: match[3],

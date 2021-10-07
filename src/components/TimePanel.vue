@@ -7,7 +7,7 @@
       <v-btn @click="pause" :disabled="paused" color="yellow lighten-4">Pause</v-btn>
       <v-btn @click="stop" color="red lighten-4">Stop</v-btn>
       <v-spacer />
-      <time-dialog title="Set Time" :disabled="playing" />
+      <time-dialog @timeSet="setTime" title="Set Time" :disabled="playing" />
     </v-card-actions>
   </v-card>
 </template>
@@ -38,6 +38,9 @@ export default {
     stop () {
       console.log('stop')
       axios.post(`${window.REST_HOST}/control/stop`)
+    },
+    setTime (time) {
+      axios.post(`${window.REST_HOST}/control/set`, time)
     }
   }
 }
