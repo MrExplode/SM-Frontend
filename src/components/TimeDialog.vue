@@ -8,7 +8,7 @@
           v-on="on">Set</v-btn>
     </template>
     <v-card>
-      <v-card-title>Set Time</v-card-title>
+      <v-card-title>{{ title }}</v-card-title>
       <v-card-text>
         <v-text-field
           v-model="inputText"
@@ -38,6 +38,7 @@ const validFormat = /([0-9]{2}):([0-9]{2}):([0-9]{2})\/([0-9]{2})/
 export default {
   name: 'TimeDialog',
   props: {
+    title: String,
     disabled: Boolean
   },
   data: () => ({

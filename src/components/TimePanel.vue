@@ -7,7 +7,7 @@
       <v-btn @click="pause" :disabled="paused" color="yellow lighten-4">Pause</v-btn>
       <v-btn @click="stop" color="red lighten-4">Stop</v-btn>
       <v-spacer />
-      <time-dialog :disabled="playing" />
+      <time-dialog title="Set Time" :disabled="playing" />
     </v-card-actions>
   </v-card>
 </template>
