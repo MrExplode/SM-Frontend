@@ -15,6 +15,9 @@ export default class AudioHandler {
         break
       case 'stop':
         break
+      case 'volume':
+        this.$store.commit('audio/setVolume', payload.volume)
+        break
     }
   }
 }

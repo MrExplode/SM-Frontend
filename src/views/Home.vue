@@ -3,7 +3,7 @@
     <time-panel class="flex-grow-1 align-self-start"/>
     <outputs class="align-self-start"/>
     <scheduler class="flex-grow-1 align-self-start" />
-    <audio-player class="align-self-start"/>
+    <audio-player class="flex-grow-1 align-self-start"/>
   </div>
 </template>
 
