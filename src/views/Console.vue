@@ -20,11 +20,13 @@ export default {
     getColoring (log) {
       const header = log.substring(0, log.split(']', 2).join(']').length)
       if (header.toLowerCase().includes('error')) {
-        return 'error'
+        return 'err'
       } else if (header.toLowerCase().includes('warn')) {
-        return 'warning'
+        return 'warn'
       } else if (header.toLowerCase().includes('debug')) {
         return 'debug'
+      } else {
+        return ''
       }
     }
   }
@@ -44,11 +46,11 @@ html, body {
   font: 16px Inconsolata, monospace;
 }
 
-.error {
+.err {
   color: #F44336;
 }
 
-.warning {
+.warn {
   color: #FFA726;
 }
 

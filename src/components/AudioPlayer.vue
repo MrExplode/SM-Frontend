@@ -1,5 +1,5 @@
 <template>
-  <v-card elevation="4" class="mx-3 my-3" max-width="344">
+  <v-card elevation="4" class="mx-3 my-3" max-width="344" :loading="playing">
     <v-card-title>Audio Player</v-card-title>
     <v-card-subtitle v-if="loadedAudio !== ''">Current track: {{ loadedAudio }}</v-card-subtitle>
     <v-card-text>
@@ -24,7 +24,7 @@ export default {
   name: 'AudioPlayer',
 
   computed: {
-    ...mapGetters('audio', ['loadedAudio', 'volume'])
+    ...mapGetters('audio', ['loadedAudio', 'volume', 'playing'])
   },
 
   methods: {

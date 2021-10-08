@@ -3,7 +3,8 @@ export default {
 
   state: () => ({
     loadedAudio: '',
-    volume: 100
+    volume: 100,
+    playing: false
   }),
 
   mutations: {
@@ -12,11 +13,15 @@ export default {
     },
     setVolume (state, payload) {
       state.volume = payload
+    },
+    setPlaying (state, payload) {
+      state.playing = payload
     }
   },
 
   getters: {
     loadedAudio: (state) => state.loadedAudio,
-    volume: (state) => state.volume
+    volume: (state) => state.volume,
+    playing: (state) => state.playing
   }
 }
