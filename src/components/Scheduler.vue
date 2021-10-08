@@ -18,7 +18,7 @@
     <v-card-actions>
       <v-btn :disabled="playing || recording" color="green lighten-4">new</v-btn>
       <v-switch
-        v-model="recording"
+        :input-value="recording"
         :disabled="playing"
         :loading="recording"
         @change="setRecording"
@@ -41,7 +41,6 @@ export default {
   name: 'Scheduler',
 
   data: () => ({
-    recording: false,
     selected: [],
     headers: [
       {
@@ -55,7 +54,7 @@ export default {
 
   computed: {
     ...mapGetters({ playing: 'controls/playing' }),
-    ...mapGetters('scheduler', ['events'])
+    ...mapGetters('scheduler', ['events', 'recording'])
   },
 
   methods: {

@@ -2,10 +2,17 @@ export default {
   namespaced: true,
 
   state: () => ({
-    events: []
+    events: [],
+    recording: false
   }),
 
   mutations: {
-    // a
+    setRecording (state, payload) {
+      state.recording = payload
+    }
+  },
+
+  getters: {
+    recording: (state) => state.recording
   }
 }

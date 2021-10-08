@@ -80,6 +80,25 @@ export default class SocketHandler {
       case 'log':
         this.$store.commit('addLog', payload.log)
         break
+      case 'output':
+        this.handleOutputUpdate(payload)
+    }
+  }
+
+  handleOutputUpdate (payload) {
+    switch (payload.name) {
+      case 'artnet':
+        this.$store.commit('outputs/setArtnet', payload.value)
+        break
+      case 'audio':
+        this.$store.commit('outputs/setAudio', payload.value)
+        break
+      case 'ltc':
+        this.$store.commit('outputs/setLtc', payload.value)
+        break
+      case 'scheduler':
+        this.$store.commit('outputs/setScheduler', payload.value)
+        break
     }
   }
 }

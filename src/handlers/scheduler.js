@@ -5,5 +5,10 @@ export default class SchedulerHandler {
 
   handleSchedulerMessage (payload) {
     // handle
+    switch (payload.action) {
+      case 'record':
+        this.$store.commit('scheduler/setRecording', payload.record)
+        break
+    }
   }
 }
