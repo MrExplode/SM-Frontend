@@ -1,6 +1,6 @@
 <template>
   <div class="inner d-flex flex-column-reverse">
-    <span v-for="(log, index) in logs.slice().reverse()" :key="index">{{log}}</span>
+    <span v-for="(log, index) in logs.slice().reverse()" :key="index" :class="getColoring(log)">{{log}}</span>
   </div>
 </template>
 
@@ -11,8 +11,22 @@ export default {
   computed: {
     ...mapGetters({ logs: 'getLogs' })
   },
+
   mounted () {
     window.scrollTo(0, document.body.scrollHeight)
+  },
+
+  methods: {
+    getColoring (log) {
+      const header = log.substring(0, log.split(']', 2).join(']').length)
+      if (header.toLowerCase().includes('error')) {
+        return 'error'
+      } else if (header.toLowerCase().includes('warn')) {
+        return 'warning'
+      } else if (header.toLowerCase().includes('debug')) {
+        return 'debug'
+      }
+    }
   }
 }
 </script>
@@ -28,5 +42,17 @@ html, body {
   background: black;
   color: white;
   font: 16px Inconsolata, monospace;
+}
+
+.error {
+  color: #F44336;
+}
+
+.warning {
+  color: #FFA726;
+}
+
+.debug {
+  color: #757575;
 }
 </style>
