@@ -17,6 +17,7 @@
       <v-btn tile plain x-large to="/">
         ShowManager
       </v-btn>
+      <div class="pt-1 beta">BETA</div>
       <v-spacer></v-spacer>
       <menu-navigator />
       <v-btn icon class="hidden-sm-and-down">
@@ -60,3 +61,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.beta {
+  color: #BDBDBD;
+}
+</style>

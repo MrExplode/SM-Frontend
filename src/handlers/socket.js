@@ -64,12 +64,9 @@ export default class SocketHandler {
         this.$store.dispatch('controls/syncPlaying')
         this.$store.dispatch('scheduler/syncRecording')
         this.$store.dispatch('audio/syncAudio')
+        this.$store.dispatch('outputs/syncOutputs')
         this.$store.commit('setLoading', false)
         this.$store.commit('loadLog', payload.logs)
-        this.$store.commit('outputs/setArtnet', payload.outputs.artnet)
-        this.$store.commit('outputs/setAudio', payload.outputs.ltc)
-        this.$store.commit('outputs/setLtc', payload.outputs.ltc)
-        this.$store.commit('outputs/setScheduler', payload.outputs.scheduler)
         break
       case 'time':
         this.timeHandler.handleTimeMessage(payload)

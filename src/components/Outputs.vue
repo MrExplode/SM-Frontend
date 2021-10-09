@@ -1,13 +1,13 @@
 <template>
-    <v-card elevation="4" class="mx-3 my-3">
-        <v-card-title>Outputs</v-card-title>
-        <div class="mx-2 d-flex flex-column">
-            <v-switch :disabled="playing" label="ArtNet" :input-value="artnet" @change="setArtnet" color="teal lighten-2" class="my-0"/>
-            <v-switch :disabled="playing" label="Audio" :input-value="audio" @change="setAudio" color="teal lighten-2" class="my-0"/>
-            <v-switch :disabled="playing" label="LTC" :input-value="ltc" @change="setLtc" color="teal lighten-2" class="my-0"/>
-            <v-switch :disabled="playing" label="Scheduler" :input-value="scheduler" @change="setScheduler" color="teal lighten-2" class="my-0"/>
-        </div>
-    </v-card>
+  <v-card elevation="4" class="mx-3 my-3">
+    <v-card-title>Outputs</v-card-title>
+    <div class="mx-2 d-flex flex-column">
+      <v-switch :disabled="playing" label="ArtNet" :input-value="artnet" @change="setArtnet" color="teal lighten-2" class="my-0"/>
+      <v-switch :disabled="playing" label="Audio" :input-value="audio" @change="setAudio" color="teal lighten-2" class="my-0"/>
+      <v-switch disabled label="LTC" :input-value="ltc" @change="setLtc" color="teal lighten-2" class="my-0"/>
+      <v-switch :disabled="playing" label="Scheduler" :input-value="scheduler" @change="setScheduler" color="teal lighten-2" class="my-0"/>
+    </div>
+  </v-card>
 </template>
 
 <script>

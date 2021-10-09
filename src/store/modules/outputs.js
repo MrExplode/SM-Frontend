@@ -1,3 +1,5 @@
+const axios = require('axios').default
+
 export default {
   namespaced: true,
 
@@ -34,5 +36,16 @@ export default {
     audio: (state) => state.audio,
     ltc: (state) => state.ltc,
     scheduler: (state) => state.scheduler
+  },
+
+  actions: {
+    syncOutputs (state) {
+      axios.get(`${window.REST_HOST}/output/all`).then(response => {
+        state.commit('setArtnet', response.data.artnet)
+        state.commit('setLtc', response.data.ltc)
+        state.commit('setAudio', response.data.audio)
+        state.commit('setScheduler', response.data.scheduler)
+      })
+    }
   }
 }
