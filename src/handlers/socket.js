@@ -61,6 +61,9 @@ export default class SocketHandler {
   handleMessage (payload) {
     switch (payload.type) {
       case 'init':
+        this.$store.dispatch('controls/syncPlaying')
+        this.$store.dispatch('scheduler/syncRecording')
+        this.$store.dispatch('audio/syncAudio')
         this.$store.commit('setLoading', false)
         this.$store.commit('loadLog', payload.logs)
         this.$store.commit('outputs/setArtnet', payload.outputs.artnet)

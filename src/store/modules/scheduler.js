@@ -1,3 +1,5 @@
+const axios = require('axios').default
+
 export default {
   namespaced: true,
 
@@ -14,5 +16,13 @@ export default {
 
   getters: {
     recording: (state) => state.recording
+  },
+
+  actions: {
+    syncRecording (state) {
+      axios.get(`${window.REST_HOST}/scheduler/record`).then(response => {
+        state.commit('setRecording', response.data.recording)
+      })
+    }
   }
 }

@@ -10,7 +10,6 @@ export default class AudioHandler {
         this.$store.commit('audio/setLoadedAudio', payload.name)
         break
       case 'start':
-        console.log('audio start')
         this.$store.commit('audio/setPlaying', true)
         break
       case 'pause':

@@ -8,7 +8,7 @@
         hint="Output volume"
         persistent-hint
         thumb-label
-        v-model="volume"
+        :value="volume"
         :disabled="loadedAudio === ''"
         @end="setVolume"
       />
