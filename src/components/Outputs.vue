@@ -15,23 +15,28 @@ import { mapGetters } from 'vuex'
 const axios = require('axios').default
 export default {
   name: 'Outputs',
+
   computed: {
     ...mapGetters({ playing: 'controls/playing' }),
     ...mapGetters('outputs', ['artnet', 'audio', 'ltc', 'scheduler'])
   },
+
   methods: {
     setArtnet (value) {
       this.$store.commit('outputs/setArtnet', value)
       axios.post(`${window.REST_HOST}/output/artnet`, { enabled: value })
     },
+
     setAudio (value) {
       this.$store.commit('outputs/setAudio', value)
       axios.post(`${window.REST_HOST}/output/audio`, { enabled: value })
     },
+
     setLtc (value) {
       this.$store.commit('outputs/setLtc', value)
       axios.post(`${window.REST_HOST}/output/ltc`, { enabled: value })
     },
+
     setScheduler (value) {
       this.$store.commit('outputs/setScheduler', value)
       axios.post(`${window.REST_HOST}/output/scheduler`, { enabled: value })

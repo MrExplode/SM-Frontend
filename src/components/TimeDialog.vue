@@ -1,11 +1,12 @@
 <template>
   <v-dialog v-model="dialog" max-width="300px">
     <template v-slot:activator="{ on, attrs }">
-        <v-btn
-          :disabled="disabled"
-          color="teal lighten-5"
-          v-bind="attrs"
-          v-on="on">Set</v-btn>
+      <v-btn
+        :disabled="disabled"
+        color="teal lighten-5"
+        v-bind="attrs"
+        v-on="on"
+      >Set</v-btn>
     </template>
     <v-card>
       <v-card-title>{{ title }}</v-card-title>
@@ -17,7 +18,7 @@
           clearable
           label="Time"
           placeholder="00:00:00/00"
-        ></v-text-field>
+        />
       </v-card-text>
       <v-card-actions>
         <v-spacer />
@@ -36,16 +37,19 @@ const validFormat = /([0-9]{2}):([0-9]{2}):([0-9]{2})\/([0-9]{2})/
 
 export default {
   name: 'TimeDialog',
+
   props: {
     title: String,
     disabled: Boolean
   },
+
   data: () => ({
     dialog: false,
     inputText: '',
     validInput: false,
     rule: [v => validFormat.test(v) || 'Invalid time format']
   }),
+
   methods: {
     setTime () {
       this.dialog = false
@@ -62,6 +66,7 @@ export default {
         this.inputText = ''
       }
     },
+
     validate () {
       if (this.inputText.match(validFormat)) {
         this.validInput = true

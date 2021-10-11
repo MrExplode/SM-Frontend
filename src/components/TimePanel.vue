@@ -15,30 +15,37 @@
 <script>
 import { mapGetters } from 'vuex'
 import TimeDialog from './TimeDialog.vue'
+
 const axios = require('axios').default
 
 export default {
   name: 'Controls',
+
   components: {
     TimeDialog
   },
+
   computed: {
     ...mapGetters({ time: 'getCurrentTime' }),
     ...mapGetters('controls', ['playing', 'paused'])
   },
+
   methods: {
     play () {
       console.log('play')
       axios.post(`${window.REST_HOST}/control/play`)
     },
+
     pause () {
       console.log('pause')
       axios.post(`${window.REST_HOST}/control/pause`)
     },
+
     stop () {
       console.log('stop')
       axios.post(`${window.REST_HOST}/control/stop`)
     },
+
     setTime (time) {
       axios.post(`${window.REST_HOST}/control/set`, time)
     }

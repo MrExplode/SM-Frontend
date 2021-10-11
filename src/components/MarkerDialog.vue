@@ -1,11 +1,12 @@
 <template>
   <v-dialog v-model="dialog" max-width="300px">
     <template v-slot:activator="{ on, attrs }">
-        <v-btn
-          :disabled="playing || current === ''"
-          color="teal lighten-5"
-          v-bind="attrs"
-          v-on="on">Create marker</v-btn>
+      <v-btn
+        :disabled="playing || current === ''"
+        color="teal lighten-5"
+        v-bind="attrs"
+        v-on="on"
+      >Create marker</v-btn>
     </template>
     <v-card>
       <v-card-title>Create marker</v-card-title>

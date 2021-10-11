@@ -1,19 +1,19 @@
 <template>
   <div v-if="visible" class="container d-flex justify-center align-center">
-      <v-sheet
-        color="teal"
-        elevation="5"
-        width="230"
-        height="230"
-        class="rounded-lg d-flex justify-center align-center flex-column">
-          <orbit-spinner
-            :animation-duration="1200"
-            :size="100"
-            color="#00E676"
-            class="mb-2"
-          />
-          <div class="message mt-4">{{ message }}</div>
-        </v-sheet>
+    <v-sheet
+      color="teal"
+      elevation="5"
+      width="230"
+      height="230"
+      class="rounded-lg d-flex justify-center align-center flex-column">
+        <orbit-spinner
+          :animation-duration="1200"
+          :size="100"
+          color="#00E676"
+          class="mb-2"
+        />
+        <div class="message mt-4">{{ message }}</div>
+      </v-sheet>
   </div>
 </template>
 
