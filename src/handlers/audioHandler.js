@@ -7,7 +7,7 @@ export default class AudioHandler {
     // stuff
     switch (payload.action) {
       case 'load':
-        this.$store.commit('audio/setLoadedAudio', payload.name)
+        this.$store.dispatch('audio/syncAudio')
         break
       case 'start':
         this.$store.commit('audio/setPlaying', true)
@@ -19,6 +19,9 @@ export default class AudioHandler {
         break
       case 'volume':
         this.$store.commit('audio/setVolume', payload.volume)
+        break
+      case 'marker':
+        this.$store.dispatch('audio/syncMarkers')
         break
     }
   }
