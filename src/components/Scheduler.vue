@@ -12,7 +12,17 @@
         :items="events"
         class="elevation-1"
       >
-
+        <template v-slot:item.time="{ item }">
+          <span>{{item.time.hour}}:{{item.time.min}}:{{item.time.sec}}/{{item.time.frame}}</span>
+        </template>
+        <template v-slot:item.type="{ item }">
+          <v-chip dark :color="typeColoring(item.type)">{{ item.type }}</v-chip>
+        </template>
+        <template v-slot:item.properties="{ item }">
+          <div>
+            <div v-if="item.type==='osc'">{{ item.packet.address }}</div>
+          </div>
+        </template>
       </v-data-table>
     </v-card-text>
     <v-card-actions>
@@ -27,7 +37,7 @@
         class="mx-5"
       />
       <v-spacer/>
-      <v-btn :disabled="playing || recording" color="red lighten-4">delete</v-btn>
+      <v-btn :disabled="playing || recording" @click="deleteEvents" color="red lighten-4">delete</v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -44,10 +54,20 @@ export default {
     selected: [],
     headers: [
       {
-        text: 'Time'
+        text: 'Time',
+        value: 'time',
+        // got it on first try, didn't even know what I was doing
+        sort: (a, b) => (Number(a.frame) * 25 + Number(a.sec) + Number(a.min) / 60 + Number(a.hour) / (60 * 60)) - (Number(b.frame) * 25 + Number(b.sec) + Number(b.min) / 60 + Number(b.hour) / (60 * 60))
       },
       {
-        text: 'Type'
+        text: 'Type',
+        value: 'type',
+        sort: (a, b) => a.type.localeCompare(b.type)
+      },
+      {
+        text: 'Properties',
+        value: 'properties',
+        sortable: false
       }
     ]
   }),
@@ -60,6 +80,25 @@ export default {
   methods: {
     setRecording (value) {
       axios.post(`${window.REST_HOST}/scheduler/record`, { enabled: value })
+    },
+
+    deleteEvents () {
+      axios.post(`${window.REST_HOST}/scheduler/deleteEvents`, this.selected)
+    },
+
+    typeColoring (type) {
+      switch (type) {
+        case 'jump':
+          return 'light-blue lighten-2'
+        case 'osc':
+          return 'primary'
+        case 'pause':
+          return 'yellow'
+        case 'stop':
+          return 'red'
+        default:
+          return ''
+      }
     }
   },
 

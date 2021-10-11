@@ -63,6 +63,7 @@ export default class SocketHandler {
       case 'init':
         this.$store.dispatch('controls/syncPlaying')
         this.$store.dispatch('scheduler/syncRecording')
+        this.$store.dispatch('scheduler/syncEvents')
         this.$store.dispatch('audio/syncAudio')
         this.$store.dispatch('outputs/syncOutputs')
         this.$store.commit('setLoading', false)

@@ -13,8 +13,9 @@
         @end="setVolume"
         class="mb-5"
       />
+      <v-divider class="mb-4"/>
       <marker-dialog @markerCreate="markerCreate" />
-      <div class="d-flex flex-wrap">
+      <div class="d-flex flex-wrap mt-2">
         <audio-marker
         v-for="(data, index) in markers"
         :key="index" :label="data.label"
