@@ -19,6 +19,7 @@ export default class TimeHandler {
       case 'stop':
         this.$store.commit('controls/setPlaying', false)
         this.$store.commit('controls/setPaused', false)
+        this.$store.dispatch('scheduler/syncEvents')
         break
     }
   }

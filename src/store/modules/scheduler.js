@@ -13,10 +13,18 @@ export default {
       state.recording = payload
     },
     setEvents (state, payload) {
-      state.events = payload
+      state.events = payload.map(ev => Object.assign(ev, { executed: false }))
     },
     addEvent (state, payload) {
-      state.events.push(payload)
+      state.events.push(Object.assign(payload, { executed: false }))
+    },
+    eventExecuted (state, payload) {
+      state.events.forEach((event, index) => {
+        if (JSON.stringify(event.time) === JSON.stringify(payload)) {
+          // state.events[index] = { ...state.events[index], ...{ executed: true } }
+          event.executed = true
+        }
+      })
     }
   },
 

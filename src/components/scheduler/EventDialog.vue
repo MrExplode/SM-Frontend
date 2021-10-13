@@ -137,9 +137,11 @@ export default {
         type: this.selectedType.value
       }
       if (usingOsc) {
-        scheduledEvent.parameterType = this.selectedOscType.value
-        scheduledEvent.parameter = this.oscParameter
-        scheduledEvent.address = this.oscAddress
+        scheduledEvent.packet = {
+          parameterType: this.selectedOscType.value,
+          parameter: this.oscParameter,
+          address: this.oscAddress
+        }
       }
       if (usingJump) {
         const match2 = this.jumpTimeText.match(validFormat)

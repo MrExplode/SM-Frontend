@@ -14,7 +14,17 @@
         class="mb-5"
       />
       <v-divider class="mb-4"/>
-      <marker-dialog @markerCreate="markerCreate" />
+      <v-col class="d-flex flex-wrap">
+        <v-row class="mb-2 justify-center">
+          <v-btn @click="quickJump(-10)" class="mx-2" color="light-blue darken-2" dark><v-icon dark>mdi-rewind-10</v-icon></v-btn>
+          <v-btn @click="quickJump(-5)" class="mx-2" color="light-blue darken-2" dark><v-icon dark>mdi-rewind-5</v-icon></v-btn>
+          <v-btn @click="quickJump(5)" class="mx-2" color="light-blue darken-2" dark><v-icon dark>mdi-fast-forward-5</v-icon></v-btn>
+          <v-btn @click="quickJump(10)" class="mx-2" color="light-blue darken-2" dark><v-icon dark>mdi-fast-forward-10</v-icon></v-btn>
+        </v-row>
+        <v-row class="justify-center">
+          <marker-dialog @markerCreate="markerCreate" />
+        </v-row>
+      </v-col>
       <div class="d-flex flex-wrap mt-2">
         <audio-marker
         v-for="(data, index) in markers"
@@ -63,6 +73,10 @@ export default {
 
     markerDelete (name) {
       axios.post(`${window.REST_HOST}/audio/markers/delete`, { name: name })
+    },
+
+    quickJump (value) {
+      axios.post(`${window.REST_HOST}/control/quickJump`, { amount: value })
     },
 
     getSpacing (index) {

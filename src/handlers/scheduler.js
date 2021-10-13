@@ -12,6 +12,9 @@ export default class SchedulerHandler {
       case 'eventAdd':
         this.$store.commit('scheduler/addEvent', payload.event)
         break
+      case 'eventExecuted':
+        this.$store.commit('scheduler/eventExecuted', payload.event.time)
+        break
       case 'syncEvents':
         this.$store.dispatch('scheduler/syncEvents')
         break

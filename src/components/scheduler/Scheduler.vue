@@ -3,7 +3,6 @@
     <v-card-title>Scheduler</v-card-title>
     <v-card-text>
       <v-data-table
-        hide-default-footer
         v-sortable-data-table
         show-select
         multi-sort
@@ -13,14 +12,19 @@
         class="elevation-1"
       >
         <template v-slot:item.time="{ item }">
-          <span>{{item.time.hour}}:{{item.time.min}}:{{item.time.sec}}/{{item.time.frame}}</span>
+          <div v-if="item.executed === true">
+            <v-chip ripple small color="green lighten-3">{{item.time.hour}}:{{item.time.min}}:{{item.time.sec}}/{{item.time.frame}}</v-chip>
+          </div>
+          <div v-else>
+            <span>{{item.time.hour}}:{{item.time.min}}:{{item.time.sec}}/{{item.time.frame}}</span>
+          </div>
         </template>
         <template v-slot:item.type="{ item }">
-          <v-chip dark :color="typeColoring(item.type)">{{ item.type }}</v-chip>
+          <v-chip ripple dark :color="typeColoring(item.type)">{{ item.type }}</v-chip>
         </template>
         <template v-slot:item.properties="{ item }">
           <div>
-            <div v-if="item.type==='osc'">{{ item.packet.address }}</div>
+            <div v-if="item.type==='osc'">{{ item.packet.address }} {{ item.packet.parameter }}</div>
           </div>
         </template>
       </v-data-table>
@@ -84,15 +88,16 @@ export default {
 
   methods: {
     setRecording (value) {
+      console.log(this.events)
       axios.post(`${window.REST_HOST}/scheduler/record`, { enabled: value })
     },
 
     eventAdd (event) {
-      console.log(event)
+      axios.post(`${window.REST_HOST}/scheduler/events/add`, { event: event })
     },
 
     deleteEvents () {
-      axios.post(`${window.REST_HOST}/scheduler/deleteEvents`, this.selected)
+      axios.post(`${window.REST_HOST}/scheduler/events/delete`, this.selected)
     },
 
     typeColoring (type) {
