@@ -26,7 +26,7 @@
       </v-data-table>
     </v-card-text>
     <v-card-actions>
-      <v-btn :disabled="playing || recording" color="green lighten-4">new</v-btn>
+      <event-dialog :disabled="playing || recording" @eventAdd="eventAdd" />
       <v-switch
         :input-value="recording"
         :disabled="playing"
@@ -43,12 +43,17 @@
 </template>
 
 <script>
+import EventDialog from './EventDialog.vue'
 import { mapGetters } from 'vuex'
 import Sortable from 'sortablejs'
 const axios = require('axios').default
 
 export default {
   name: 'Scheduler',
+
+  components: {
+    EventDialog
+  },
 
   data: () => ({
     selected: [],
@@ -80,6 +85,10 @@ export default {
   methods: {
     setRecording (value) {
       axios.post(`${window.REST_HOST}/scheduler/record`, { enabled: value })
+    },
+
+    eventAdd (event) {
+      console.log(event)
     },
 
     deleteEvents () {

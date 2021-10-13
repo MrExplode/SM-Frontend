@@ -9,9 +9,9 @@
 
 <script>
 import Outputs from '../components/Outputs.vue'
-import TimePanel from '../components/TimePanel.vue'
+import TimePanel from '../components/time/TimePanel.vue'
 import AudioPlayer from '../components/AudioPlayer.vue'
-import Scheduler from '../components/Scheduler.vue'
+import Scheduler from '../components/scheduler/Scheduler.vue'
 
 export default {
   name: 'Home',

@@ -31,8 +31,8 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import AudioMarker from './AudioMarker.vue'
-import MarkerDialog from './MarkerDialog.vue'
+import AudioMarker from './marker/AudioMarker.vue'
+import MarkerDialog from './marker/MarkerDialog.vue'
 
 const axios = require('axios').default
 
