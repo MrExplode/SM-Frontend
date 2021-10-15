@@ -3,10 +3,10 @@
     <v-card-title>Scheduler</v-card-title>
     <v-card-text>
       <v-data-table
-        v-sortable-data-table
-        show-select
-        multi-sort
         v-model="selected"
+        show-select
+        single-select
+        multi-sort
         :headers="headers"
         :items="events"
         class="elevation-1"
@@ -65,13 +65,13 @@ export default {
       {
         text: 'Time',
         value: 'time',
-        // got it on first try, didn't even know what I was doing
-        sort: (a, b) => (Number(a.frame) * 25 + Number(a.sec) + Number(a.min) / 60 + Number(a.hour) / (60 * 60)) - (Number(b.frame) * 25 + Number(b.sec) + Number(b.min) / 60 + Number(b.hour) / (60 * 60))
+        sort: (a, b) => { console.log(a, b); return a.millisecLength - b.millisecLength },
+        filter: () => true
       },
       {
         text: 'Type',
         value: 'type',
-        sort: (a, b) => a.type.localeCompare(b.type)
+        sort: (a, b) => a.localeCompare(b)
       },
       {
         text: 'Properties',
