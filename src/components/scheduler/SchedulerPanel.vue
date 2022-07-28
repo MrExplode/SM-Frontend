@@ -53,7 +53,7 @@ import Sortable from 'sortablejs'
 const axios = require('axios').default
 
 export default {
-  name: 'Scheduler',
+  name: 'SchedulerPanel',
 
   components: {
     EventDialog

@@ -4,7 +4,7 @@
     <div class="mx-2 d-flex flex-column">
       <v-switch :disabled="playing" label="ArtNet" :input-value="artnet" @change="setArtnet" color="teal lighten-2" class="my-0"/>
       <v-switch :disabled="playing" label="Audio" :input-value="audio" @change="setAudio" color="teal lighten-2" class="my-0"/>
-      <v-switch disabled label="LTC" :input-value="ltc" @change="setLtc" color="teal lighten-2" class="my-0"/>
+      <v-switch :disabled="playing" label="LTC" :input-value="ltc" @change="setLtc" color="teal lighten-2" class="my-0"/>
       <v-switch :disabled="playing" label="Scheduler" :input-value="scheduler" @change="setScheduler" color="teal lighten-2" class="my-0"/>
     </div>
   </v-card>
@@ -14,7 +14,7 @@
 import { mapGetters } from 'vuex'
 const axios = require('axios').default
 export default {
-  name: 'Outputs',
+  name: 'OutputsPanel',
 
   computed: {
     ...mapGetters({ playing: 'controls/playing' }),

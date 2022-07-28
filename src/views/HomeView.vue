@@ -8,13 +8,13 @@
 </template>
 
 <script>
-import Outputs from '../components/Outputs.vue'
+import Outputs from '../components/OutputsPanel.vue'
 import TimePanel from '../components/time/TimePanel.vue'
 import AudioPlayer from '../components/AudioPlayer.vue'
-import Scheduler from '../components/scheduler/Scheduler.vue'
+import Scheduler from '../components/scheduler/SchedulerPanel.vue'
 
 export default {
-  name: 'Home',
+  name: 'HomeView',
 
   components: {
     TimePanel,

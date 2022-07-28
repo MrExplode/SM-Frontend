@@ -7,7 +7,7 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
-  name: 'Console',
+  name: 'ConsoleView',
   computed: {
     ...mapGetters({ logs: 'getLogs' })
   },

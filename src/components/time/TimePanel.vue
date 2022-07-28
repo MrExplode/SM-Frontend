@@ -19,7 +19,7 @@ import TimeDialog from './TimeDialog.vue'
 const axios = require('axios').default
 
 export default {
-  name: 'Controls',
+  name: 'ControlsPanel',
 
   components: {
     TimeDialog

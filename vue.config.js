@@ -1,4 +1,5 @@
-module.exports = {
+const { defineConfig } = require('@vue/cli-service')
+module.exports = defineConfig({
   transpileDependencies: [
     'vuetify'
   ],
@@ -6,4 +7,4 @@ module.exports = {
     name: 'ShowManager',
     themeColor: '#00897B'
   }
-}
+})
